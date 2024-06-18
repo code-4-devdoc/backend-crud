@@ -32,10 +32,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션 사용하지 않음 (Stateless)
 				.and()
 				.authorizeRequests() // 요청에 대한 인증 설정
-				.antMatchers("/", "/auth/**", "/h2-console/**").permitAll() // 특정 경로 인증 없이 접근 허용
+				.antMatchers("/", "/auth/**", "/h2-console/**",
+						"/api-docs/**", "/swagger-resources/**",
+						"/swagger-ui.html", "/webjars/**","/favicon.ico",
+						 "/swagger-ui/**").permitAll() // 특정 경로 인증 없이 접근 허용
 				.anyRequest() // 나머지 모든 요청
 				.authenticated(); // 인증 필요
-
 
 		http.headers().frameOptions().sameOrigin(); // h2-console 접근을 위한 설정. 같은 오리진에서의 프레임 사용 허용
 

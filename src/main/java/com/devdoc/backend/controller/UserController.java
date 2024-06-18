@@ -6,6 +6,7 @@ import com.devdoc.backend.dto.UserDTO;
 import com.devdoc.backend.model.UserEntity;
 import com.devdoc.backend.security.TokenProvider;
 import com.devdoc.backend.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "User API", description = "API for managing users")
 public class UserController {
 
 	@Autowired

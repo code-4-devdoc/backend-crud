@@ -6,6 +6,7 @@ import com.devdoc.backend.dto.LanguageDTO;
 import com.devdoc.backend.dto.ResumeDTO;
 import com.devdoc.backend.model.Resume;
 import com.devdoc.backend.service.ResumeService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/resumes")
+@Tag(name = "Resume API", description = "API for managing resumes")
 public class ResumeController {
 
     @Autowired
