@@ -28,10 +28,25 @@ public class Resume {
     private UserEntity user; // 이력서를 소유한 유저
 
     @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Language> languages; // 이력서에 포함된 Language 목록
+    private List<Activity> activities; // 이력서에 포함된 Activity 목록
 
     @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Award> awards; // 이력서에 포함된 Award 목록
+
+    @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Certification> certifications; // 이력서에 포함된 Certification 목록
+
+    @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Education> educations; // 이력서에 포함된 Education 목록
+
+    @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<EducationCompletion> educationCompletions; // 이력서에 포함된 EducationCompletion 목록
+
+    @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Language> languages; // 이력서에 포함된 Language 목록
+
+    @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PersonalInfo> personalInfos; // 이력서에 포함된 PersonalInfo 목록
 
     @PrePersist
     protected void onCreate() {
