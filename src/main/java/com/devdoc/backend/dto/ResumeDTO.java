@@ -15,6 +15,11 @@ public class ResumeDTO {
     private Integer id;
     private String title;
     private LocalDateTime createdAt;
-    private List<LanguageDTO> languages;
+    private List<ActivityDTO> activities;
     private List<AwardDTO> awards;
+    private List<CertificationDTO> certifications;
+    private List<EducationDTO> educations;
+    private List<EducationCompletionDTO> educationCompletions;
+    private List<LanguageDTO> languages;
+    private List<PersonalInfoDTO> personalInfos;
 }
