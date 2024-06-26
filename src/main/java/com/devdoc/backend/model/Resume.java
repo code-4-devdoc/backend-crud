@@ -40,13 +40,13 @@ public class Resume {
     private List<Education> educations; // 이력서에 포함된 Education 목록
 
     @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<EducationCompletion> educationCompletions; // 이력서에 포함된 EducationCompletion 목록
+    private List<Training> trainings; // 이력서에 포함된 Training 목록
 
     @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Language> languages; // 이력서에 포함된 Language 목록
 
     @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<PersonalInfo> personalInfos; // 이력서에 포함된 PersonalInfo 목록
+    private List<AboutMe> aboutMe; // 이력서에 포함된 PersonalInfo 목록
 
     @PrePersist
     protected void onCreate() {
