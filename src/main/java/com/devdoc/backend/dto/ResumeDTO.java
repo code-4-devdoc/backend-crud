@@ -19,7 +19,7 @@ public class ResumeDTO {
     private List<AwardDTO> awards;
     private List<CertificationDTO> certifications;
     private List<EducationDTO> educations;
-    private List<EducationCompletionDTO> educationCompletions;
+    private List<TrainingDTO> trainings;
     private List<LanguageDTO> languages;
-    private List<PersonalInfoDTO> personalInfos;
+    private List<AboutMeDTO> aboutMes;
 }

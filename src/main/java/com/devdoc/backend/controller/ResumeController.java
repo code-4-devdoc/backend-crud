@@ -30,7 +30,7 @@ public class ResumeController {
         }
     }
 
-    // Certification 데이터 삭제
+    // Activity 데이터 삭제
     @DeleteMapping("/{resumeId}/activities/{activityId}")
     public ResponseEntity<Void> deleteActivity(@PathVariable int resumeId, @PathVariable int activityId) {
         try {
@@ -41,7 +41,7 @@ public class ResumeController {
         }
     }
 
-    // Certification 데이터 수정
+    // Activity 데이터 수정
     @PutMapping("/{resumeId}/activities")
     public ResponseEntity<ActivityDTO> updateActivity(@PathVariable int resumeId, @RequestBody ActivityDTO activityDTO) {
         try {
@@ -126,40 +126,40 @@ public class ResumeController {
 
     /* Education 관련 메소드 끝 */
 
-    // EducationCompletion 데이터 저장 또는 수정
-    @PostMapping("/{resumeId}/educationCompletion")
-    public ResponseEntity<EducationCompletionDTO> saveOrUpdateEducationCompletion(@PathVariable int resumeId, @RequestBody EducationCompletionDTO educationCompletionDTO) {
+    // Training 데이터 저장 또는 수정
+    @PostMapping("/{resumeId}/training")
+    public ResponseEntity<TrainingDTO> saveOrUpdateTraining(@PathVariable int resumeId, @RequestBody TrainingDTO trainingDTO) {
         try {
-            EducationCompletionDTO updatedEducationCompletion = resumeService.saveOrUpdateEducationCompletion(resumeId, educationCompletionDTO);
-            return ResponseEntity.ok(updatedEducationCompletion); // 업데이트된 educationCompletion 데이터 반환
+            TrainingDTO updatedTraining = resumeService.saveOrUpdateTraining(resumeId, trainingDTO);
+            return ResponseEntity.ok(updatedTraining); // 업데이트된 Training 데이터 반환
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // 서버 에러 발생 시 500 반환
         }
     }
 
-    // EducationCompletion 데이터 삭제
-    @DeleteMapping("/{resumeId}/educationCompletion/{educationCompletionId}")
-    public ResponseEntity<Void> deleteEducationCompletion(@PathVariable int resumeId, @PathVariable int educationCompletionId) {
+    // Training 데이터 삭제
+    @DeleteMapping("/{resumeId}/training/{trainingId}")
+    public ResponseEntity<Void> deleteTriaing(@PathVariable int resumeId, @PathVariable int trainingId) {
         try {
-            resumeService.deleteEducationCompletion(resumeId, educationCompletionId);
+            resumeService.deleteTraining(resumeId, trainingId);
             return ResponseEntity.noContent().build(); // educationCompletion 데이터 삭제 후 no content 반환
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    // EducationCompletion 데이터 수정
-    @PutMapping("/{resumeId}/educationCompletion")
-    public ResponseEntity<EducationCompletionDTO> updateEducationCompletion(@PathVariable int resumeId, @RequestBody EducationCompletionDTO educationCompletionDTO) {
+    // Training 데이터 수정
+    @PutMapping("/{resumeId}/training")
+    public ResponseEntity<TrainingDTO> updateTraining(@PathVariable int resumeId, @RequestBody TrainingDTO trainingDTO) {
         try {
-            EducationCompletionDTO updatedEducationCompletion = resumeService.saveOrUpdateEducationCompletion(resumeId, educationCompletionDTO);
-            return ResponseEntity.ok(updatedEducationCompletion); // 수정된 educationCompletion 데이터 반환
+            TrainingDTO updatedTraining = resumeService.saveOrUpdateTraining(resumeId, trainingDTO);
+            return ResponseEntity.ok(updatedTraining); // 수정된 educationCompletion 데이터 반환
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    /* EducationCompletion 관련 메소드 끝 */
+    /* Training 관련 메소드 끝 */
 
 
 
@@ -235,40 +235,40 @@ public class ResumeController {
 
     /* Language 관련 메소드 끝 */
 
-    // PersonalInfo 데이터 저장 또는 수정
-    @PostMapping("/{resumeId}/personalInfo")
-    public ResponseEntity<PersonalInfoDTO> saveOrUpdatePersonalInfo(@PathVariable int resumeId, @RequestBody PersonalInfoDTO personalInfoDTO) {
+    // AboutMe 데이터 저장 또는 수정
+    @PostMapping("/{resumeId}/aboutMe")
+    public ResponseEntity<AboutMeDTO> saveOrUpdateAboutMe(@PathVariable int resumeId, @RequestBody AboutMeDTO aboutMeDTO) {
         try {
-            PersonalInfoDTO updatedPersonalInfo = resumeService.saveOrUpdatePersonalInfo(resumeId, personalInfoDTO);
-            return ResponseEntity.ok(updatedPersonalInfo); // 업데이트된 personalInfo 데이터 반환
+            AboutMeDTO updatedAboutMe = resumeService.saveOrUpdateAboutMe(resumeId, aboutMeDTO);
+            return ResponseEntity.ok(updatedAboutMe); // 업데이트된 AboutMe 데이터 반환
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // 서버 에러 발생 시 500 반환
         }
     }
 
-    // PersonalInfo 데이터 삭제
-    @DeleteMapping("/{resumeId}/personalInfo/{personalInfoId}")
-    public ResponseEntity<Void> deletePersonalInfo(@PathVariable int resumeId, @PathVariable int personalInfoId) {
+    // AboutMe 데이터 삭제
+    @DeleteMapping("/{resumeId}/aboutMe/{aboutMeId}")
+    public ResponseEntity<Void> deleteAboutMe(@PathVariable int resumeId, @PathVariable int aboutMeId) {
         try {
-            resumeService.deletePersonalInfo(resumeId, personalInfoId);
-            return ResponseEntity.noContent().build(); // personalInfo 데이터 삭제 후 no content 반환
+            resumeService.deleteAboutMe(resumeId, aboutMeId);
+            return ResponseEntity.noContent().build(); // AboutMe 데이터 삭제 후 no content 반환
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    // PersonalInfo 데이터 수정
-    @PutMapping("/{resumeId}/personalInfo")
-    public ResponseEntity<PersonalInfoDTO> updatePersonalInfo(@PathVariable int resumeId, @RequestBody PersonalInfoDTO personalInfoDTO) {
+    // AboutMe 데이터 수정
+    @PutMapping("/{resumeId}/aboutMe")
+    public ResponseEntity<AboutMeDTO> updateAboutMe(@PathVariable int resumeId, @RequestBody AboutMeDTO aboutMeDTO) {
         try {
-            PersonalInfoDTO updatedPersonalInfo = resumeService.saveOrUpdatePersonalInfo(resumeId, personalInfoDTO);
-            return ResponseEntity.ok(updatedPersonalInfo); // 수정된 personalInfo 데이터 반환
+            AboutMeDTO updatedAboutMe = resumeService.saveOrUpdateAboutMe(resumeId, aboutMeDTO);
+            return ResponseEntity.ok(updatedAboutMe); // 수정된 AboutMe 데이터 반환
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    /* PersonalInfo 관련 메소드 끝 */
+    /* AboutMe 관련 메소드 끝 */
 
 
     // 이력서 저장

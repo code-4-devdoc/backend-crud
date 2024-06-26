@@ -21,13 +21,13 @@ public class ResumeService {
     @Autowired
     private CertificationRepository certificationRepository;
     @Autowired
-    private EducationCompletionRepository educationCompletionRepository;
+    private TrainingRepository trainingRepository;
     @Autowired
     private EducationRepository educationRepository;
     @Autowired
     private LanguageRepository languageRepository;
     @Autowired
-    private PersonalInfoRepository personalInfoRepository;
+    private AboutMeRepository aboutMeRepository;
     @Autowired
     private ResumeRepository resumeRepository;
     @Autowired
@@ -156,35 +156,35 @@ public class ResumeService {
         education.ifPresent(educationRepository::delete);
     }
 
-    // EducationCompletion 항목 데이터 저장 또는 업데이트
+    // Training 항목 데이터 저장 또는 업데이트
     @Transactional
-    public EducationCompletionDTO saveOrUpdateEducationCompletion(int resumeId, EducationCompletionDTO educationCompletionDTO) {
+    public TrainingDTO saveOrUpdateTraining(int resumeId, TrainingDTO trainingDTO) {
         Optional<Resume> optionalResume = resumeRepository.findById(resumeId);
         if (optionalResume.isPresent()) {
             Resume resume = optionalResume.get();
-            EducationCompletion educationCompletion = educationCompletionRepository.findByIdAndResumeId(educationCompletionDTO.getId(), resumeId)
-                    .orElse(new EducationCompletion());
+            Training training = trainingRepository.findByIdAndResumeId(trainingDTO.getId(), resumeId)
+                    .orElse(new Training());
 
-            boolean isNew = (educationCompletion.getId() == null); // 새로운 항목인지 확인
+            boolean isNew = (training.getId() == null); // 새로운 항목인지 확인
 
-            educationCompletion.setCourseName(educationCompletionDTO.getCourseName());
-            educationCompletion.setInstitution(educationCompletionDTO.getInstitution());
-            educationCompletion.setStartDate(educationCompletionDTO.getStartDate());
-            educationCompletion.setEndDate(educationCompletionDTO.getEndDate());
-            educationCompletion.setResume(resume);
+            training.setCourseName(trainingDTO.getCourseName());
+            training.setInstitution(trainingDTO.getInstitution());
+            training.setStartDate(trainingDTO.getStartDate());
+            training.setEndDate(trainingDTO.getEndDate());
+            training.setResume(resume);
 
-            EducationCompletion savedEducationCompletion = educationCompletionRepository.save(educationCompletion);
+            Training savedTraining = trainingRepository.save(training);
 
-            return new EducationCompletionDTO(savedEducationCompletion.getId(), savedEducationCompletion.getCourseName(), savedEducationCompletion.getInstitution(), savedEducationCompletion.getStartDate(), savedEducationCompletion.getEndDate());
+            return new TrainingDTO(savedTraining.getId(), savedTraining.getCourseName(), savedTraining.getInstitution(), savedTraining.getStartDate(), savedTraining.getEndDate());
         }
         throw new RuntimeException("Resume not found");
     }
 
-    // EducationCompletion 항목 데이터 삭제
+    // Training 항목 데이터 삭제
     @Transactional
-    public void deleteEducationCompletion(int resumeId, int educationCompletionId) {
-        Optional<EducationCompletion> educationCompletion = educationCompletionRepository.findByIdAndResumeId(educationCompletionId, resumeId);
-        educationCompletion.ifPresent(educationCompletionRepository::delete);
+    public void deleteTraining(int resumeId, int trainingId) {
+        Optional<Training> training = trainingRepository.findByIdAndResumeId(trainingId, resumeId);
+        training.ifPresent(trainingRepository::delete);
     }
 
     // Language 항목 데이터 저장 또는 업데이트
@@ -218,38 +218,38 @@ public class ResumeService {
         language.ifPresent(languageRepository::delete);
     }
 
-    // PersonalInfo 항목 데이터 저장 또는 업데이트
+    // AboutMe 항목 데이터 저장 또는 업데이트
     @Transactional
-    public PersonalInfoDTO saveOrUpdatePersonalInfo(int resumeId, PersonalInfoDTO personalInfoDTO) {
+    public AboutMeDTO saveOrUpdateAboutMe(int resumeId, AboutMeDTO aboutMeDTO) {
         Optional<Resume> optionalResume = resumeRepository.findById(resumeId);
         if (optionalResume.isPresent()) {
             Resume resume = optionalResume.get();
-            PersonalInfo personalInfo = personalInfoRepository.findByIdAndResumeId(personalInfoDTO.getId(), resumeId)
-                    .orElse(new PersonalInfo());
+            AboutMe aboutMe = aboutMeRepository.findByIdAndResumeId(aboutMeDTO.getId(), resumeId)
+                    .orElse(new AboutMe());
 
-            boolean isNew = (personalInfo.getId() == null); // 새로운 항목인지 확인
+            boolean isNew = (aboutMe.getId() == null); // 새로운 항목인지 확인
 
-            personalInfo.setPhoto(personalInfoDTO.getPhoto());
-            personalInfo.setName(personalInfoDTO.getName());
-            personalInfo.setJobTitle(personalInfoDTO.getJobTitle());
-            personalInfo.setEmail(personalInfoDTO.getEmail());
-            personalInfo.setPhoneNumber(personalInfoDTO.getPhoneNumber());
-            personalInfo.setBlog(personalInfoDTO.getBlog());
-            personalInfo.setIntroduction(personalInfoDTO.getIntroduction());
-            personalInfo.setResume(resume);
+            aboutMe.setPhoto(aboutMeDTO.getPhoto());
+            aboutMe.setName(aboutMeDTO.getName());
+            aboutMe.setJobTitle(aboutMeDTO.getJobTitle());
+            aboutMe.setEmail(aboutMeDTO.getEmail());
+            aboutMe.setPhoneNumber(aboutMeDTO.getPhoneNumber());
+            aboutMe.setBlog(aboutMeDTO.getBlog());
+            aboutMe.setIntroduction(aboutMeDTO.getIntroduction());
+            aboutMe.setResume(resume);
 
-            PersonalInfo savedPersonalInfo = personalInfoRepository.save(personalInfo);
+            AboutMe savedAboutMe = aboutMeRepository.save(aboutMe);
 
-            return new PersonalInfoDTO(savedPersonalInfo.getId(), savedPersonalInfo.getPhoto(), savedPersonalInfo.getName(), savedPersonalInfo.getJobTitle(), savedPersonalInfo.getEmail(), savedPersonalInfo.getPhoneNumber(), savedPersonalInfo.getBlog(), savedPersonalInfo.getIntroduction());
+            return new AboutMeDTO(savedAboutMe.getId(), savedAboutMe.getPhoto(), savedAboutMe.getName(), savedAboutMe.getJobTitle(), savedAboutMe.getEmail(), savedAboutMe.getPhoneNumber(), savedAboutMe.getBlog(), savedAboutMe.getIntroduction());
         }
         throw new RuntimeException("Resume not found");
     }
 
-    // PersonalInfo 항목 데이터 삭제
+    // AboutMe 항목 데이터 삭제
     @Transactional
-    public void deletePersonalInfo(int resumeId, int personalInfoId) {
-        Optional<PersonalInfo> personalInfo = personalInfoRepository.findByIdAndResumeId(personalInfoId, resumeId);
-        personalInfo.ifPresent(personalInfoRepository::delete);
+    public void deleteAboutMe(int resumeId, int aboutMeId) {
+        Optional<AboutMe> aboutMe = aboutMeRepository.findByIdAndResumeId(aboutMeId, resumeId);
+        aboutMe.ifPresent(aboutMeRepository::delete);
     }
 
     // 이력서 저장
@@ -280,20 +280,20 @@ public class ResumeService {
                     .collect(Collectors.toList());
             resume.setEducations(educations);
 
-            List<EducationCompletion> educationCompletions = resumeDTO.getEducationCompletions().stream()
-                    .map(educationCompletionDTO -> new EducationCompletion(educationCompletionDTO.getId(), educationCompletionDTO.getCourseName(), educationCompletionDTO.getInstitution(), educationCompletionDTO.getStartDate(), educationCompletionDTO.getEndDate(), resume))
+            List<Training> trainings = resumeDTO.getTrainings().stream()
+                    .map(trainingDTO -> new Training(trainingDTO.getId(), trainingDTO.getCourseName(), trainingDTO.getInstitution(), trainingDTO.getStartDate(), trainingDTO.getEndDate(), resume))
                     .collect(Collectors.toList());
-            resume.setEducationCompletions(educationCompletions);
+            resume.setTrainings(trainings);
 
             List<Language> languages = resumeDTO.getLanguages().stream()
                     .map(languageDTO -> new Language(languageDTO.getId(), languageDTO.getLanguage(), languageDTO.getTestName(), languageDTO.getScore(), languageDTO.getDate(), resume))
                     .collect(Collectors.toList());
             resume.setLanguages(languages);
 
-            List<PersonalInfo> personalInfos = resumeDTO.getPersonalInfos().stream()
-                    .map(personalInfoDTO -> new PersonalInfo(personalInfoDTO.getId(), personalInfoDTO.getPhoto(), personalInfoDTO.getName(), personalInfoDTO.getJobTitle(), personalInfoDTO.getEmail(), personalInfoDTO.getPhoneNumber(), personalInfoDTO.getBlog(), personalInfoDTO.getIntroduction(), resume))
+            List<AboutMe> aboutMes = resumeDTO.getAboutMes().stream()
+                    .map(aboutMeDTO -> new AboutMe(aboutMeDTO.getId(), aboutMeDTO.getPhoto(), aboutMeDTO.getName(), aboutMeDTO.getJobTitle(), aboutMeDTO.getEmail(), aboutMeDTO.getPhoneNumber(), aboutMeDTO.getBlog(), aboutMeDTO.getIntroduction(), resume))
                     .collect(Collectors.toList());
-            resume.setPersonalInfos(personalInfos);
+            resume.setAboutMe(aboutMes);
 
             resumeRepository.save(resume);
         }
@@ -321,20 +321,20 @@ public class ResumeService {
                     .map(education -> new EducationDTO(education.getId(), education.getSchoolName(), education.getMajor(), education.getEnrollmentPeriod(), education.getStatus()))
                     .collect(Collectors.toList());
 
-            List<EducationCompletionDTO> educationCompletionDTOS = resume.getEducationCompletions().stream()
-                    .map(educationCompletion -> new EducationCompletionDTO(educationCompletion.getId(), educationCompletion.getCourseName(), educationCompletion.getInstitution(), educationCompletion.getStartDate(), educationCompletion.getEndDate()))
+            List<TrainingDTO> trainingDTOS = resume.getTrainings().stream()
+                    .map(training -> new TrainingDTO(training.getId(), training.getCourseName(), training.getInstitution(), training.getStartDate(), training.getEndDate()))
                     .collect(Collectors.toList());
 
             List<LanguageDTO> languageDTOs = resume.getLanguages().stream()
                     .map(language -> new LanguageDTO(language.getId(), language.getLanguage(), language.getTestName(), language.getScore(), language.getDate()))
                     .collect(Collectors.toList());
 
-            List<PersonalInfoDTO> personalInfoDTOS = resume.getPersonalInfos().stream()
-                    .map(personalInfo -> new PersonalInfoDTO(personalInfo.getId(), personalInfo.getPhoto(), personalInfo.getName(), personalInfo.getJobTitle(), personalInfo.getEmail(), personalInfo.getPhoneNumber(), personalInfo.getBlog(), personalInfo.getIntroduction()))
+            List<AboutMeDTO> aboutMeDTOs = resume.getAboutMe().stream()
+                    .map(aboutMe -> new AboutMeDTO(aboutMe.getId(), aboutMe.getPhoto(), aboutMe.getName(), aboutMe.getJobTitle(), aboutMe.getEmail(), aboutMe.getPhoneNumber(), aboutMe.getBlog(), aboutMe.getIntroduction()))
                     .collect(Collectors.toList());
 
 
-            return new ResumeDTO(resume.getId(), resume.getTitle(), resume.getCreatedAt(), activityDTOS, awardDTOs, certificationDTOS, educationDTOS, educationCompletionDTOS, languageDTOs, personalInfoDTOS );
+            return new ResumeDTO(resume.getId(), resume.getTitle(), resume.getCreatedAt(), activityDTOS, awardDTOs, certificationDTOS, educationDTOS, trainingDTOS, languageDTOs, aboutMeDTOs);
         }
         return null;
     }
@@ -368,9 +368,9 @@ public class ResumeService {
                 .map(education -> new EducationDTO(education.getId(), education.getSchoolName(), education.getMajor(), education.getEnrollmentPeriod(), education.getStatus()))
                 .collect(Collectors.toList());
 
-        List<EducationCompletionDTO> educationCompletions = educationCompletionRepository.findByResumeId(resume.getId())
+        List<TrainingDTO> trainings = trainingRepository.findByResumeId(resume.getId())
                 .stream()
-                .map(educationCompletion -> new EducationCompletionDTO(educationCompletion.getId(), educationCompletion.getCourseName(), educationCompletion.getInstitution(), educationCompletion.getStartDate(), educationCompletion.getEndDate()))
+                .map(training -> new TrainingDTO(training.getId(), training.getCourseName(), training.getInstitution(), training.getStartDate(), training.getEndDate()))
                 .collect(Collectors.toList());
 
         List<LanguageDTO> languages = languageRepository.findByResumeId(resume.getId())
@@ -378,13 +378,13 @@ public class ResumeService {
                 .map(language -> new LanguageDTO(language.getId(), language.getLanguage(), language.getTestName(), language.getScore(), language.getDate()))
                 .collect(Collectors.toList());
 
-        List<PersonalInfoDTO> personalInfos = personalInfoRepository.findByResumeId(resume.getId())
+        List<AboutMeDTO> aboutMes = aboutMeRepository.findByResumeId(resume.getId())
                 .stream()
-                .map(personalInfo -> new PersonalInfoDTO(personalInfo.getId(), personalInfo.getPhoto(), personalInfo.getName(), personalInfo.getJobTitle(), personalInfo.getEmail(), personalInfo.getPhoneNumber(), personalInfo.getBlog(), personalInfo.getIntroduction()))
+                .map(aboutme -> new AboutMeDTO(aboutme.getId(), aboutme.getPhoto(), aboutme.getName(), aboutme.getJobTitle(), aboutme.getEmail(), aboutme.getPhoneNumber(), aboutme.getBlog(), aboutme.getIntroduction()))
                 .collect(Collectors.toList());
 
 
-        return new ResumeDTO(resume.getId(), resume.getTitle(), resume.getCreatedAt(), activities, awards, certifications, educations, educationCompletions, languages, personalInfos );
+        return new ResumeDTO(resume.getId(), resume.getTitle(), resume.getCreatedAt(), activities, awards, certifications, educations, trainings, languages, aboutMes );
     }
 
     // 특정 사용자의 모든 이력서 조회
